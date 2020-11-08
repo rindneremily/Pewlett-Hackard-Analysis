@@ -115,11 +115,38 @@ LEFT JOIN titles as ut
 ON es.emp_no = ut.emp_no
 GROUP BY ut.emp_no;
 
-
 --D2
---step 1
 SELECT emp_no, first_name, last_name, birth_date
 INTO mentor_elig
 FROM employees
 WHERE birth_date BETWEEN '1965-01-01' AND '1965-12-31';
 SELECT * FROM employees;
+
+SELECT from_date, to_date
+INTO mentor_date
+FROM dept_emp;
+SELECT * FROM dept_emp;
+
+SELECT title
+FROM titles;
+SELECT * FROM titles;
+
+-- Use Dictinct with Orderby to remove duplicate rows
+SELECT DISTINCT ON (emp_no)
+INTO dist_emp
+FROM mentor_elig
+ORDER BY emp_no DESC;
+
+SELECT employees.emp_no,
+	employees.first_name,
+	employees.last_name,
+	employees.birth_date,
+	titles.title
+FROM mentor_elig
+INNER JOIN titles
+ON (employees.emp_no = titles.emp_no)
+GROUP BY employees.birth_date
+ORDER BY employees.birth_date;
+
+SELECT * FROM mentor_elig
+ORDER BY employees.emp_no;
