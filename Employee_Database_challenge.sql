@@ -114,3 +114,12 @@ FROM employees as es
 LEFT JOIN titles as ut
 ON es.emp_no = ut.emp_no
 GROUP BY ut.emp_no;
+
+
+--D2
+--step 1
+SELECT emp_no, first_name, last_name, birth_date
+INTO mentor_elig
+FROM employees
+WHERE birth_date BETWEEN '1965-01-01' AND '1965-12-31';
+SELECT * FROM employees;
